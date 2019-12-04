@@ -14,7 +14,7 @@ const withTryCatch = (WrappedComponent: any) => {
       super(props);
     }
 
-    trycatch<T>(fn:()=>T,errorHandler:(error:Error)=>void = error => null):Result<T>{
+    trycatch<T>(fn:()=>T,errorHandler?:(error:Error)=>void):Result<T>{
       try {
         this.result = fn()
       } catch (error) {
@@ -29,15 +29,15 @@ const withTryCatch = (WrappedComponent: any) => {
       return <WrappedComponent trycatch={this.trycatch} />;
     }
   }
-};
+}
 
-const useTryCatch = (statement:Function,errorHandler?:Function) => {
+function useTryCatch<T>(fn:()=>T,errorHandler?:(error:Error)=>void):Result<T>{
   let _result:any = null
   let _error:any = null
 
-  const trycatch = () => {
+  const trycatch = ():Result<T> => {
     try {
-      _result = statement()
+      _result = fn()
     } catch (error) {
       if(errorHandler) errorHandler(error)
       _error = error

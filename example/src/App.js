@@ -16,7 +16,7 @@ import {withTryCatch, useTryCatch} from 'trycatch'
 
 
 //   render () {
-//     let {result,error} = this.props.trycatch(this.test)
+//     let {result,error} = this.props.trycatch(test)
 //     console.log('RES',result,'ERR',error)
 //     return (
 //       <div>
