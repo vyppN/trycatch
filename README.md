@@ -1,6 +1,6 @@
 # trycatch
 
-> Make try/catch invisible
+> Hide try/catch in hook and HOC
 
 [![NPM](https://img.shields.io/npm/v/trycatch.svg)](https://www.npmjs.com/package/trycatch) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
