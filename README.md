@@ -20,7 +20,7 @@ HOC style
 ```tsx
 import * as React from 'react'
 
-import {withTryCatch} from 'trycatch'
+import {withTryCatch} from '@vyppn/trycatch'
 
 class App extends React.Component {
 
@@ -28,7 +28,7 @@ class App extends React.Component {
   // try{
   //  let result someThrowable()
   // }catch(error){
-      let theError = error
+  //    let theError = error
   //  someErrorHandler(error)
   // }
   //
@@ -52,6 +52,22 @@ class App extends React.Component {
 }
 
 export default withTryCatch(App)
+```
+
+Hook style
+
+```tsx
+import {useTryCatch} from '@vyppn/trycatch'
+export default () => {
+  // With error handling
+  const {result,error} = useTryCatch(someThrowable,someErrorHandler)
+  // Without error handling
+  const {result,error} = useTryCatch(someThrowable)
+  // void throwable
+  const {error} = useTryCatch(someThrowable)
+
+  return <div>Hellow</div>
+}
 ```
 
 ## License
