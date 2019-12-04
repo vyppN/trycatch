@@ -1,23 +1,50 @@
 /**
- * @class ExampleComponent
+ * @class TryCatch
  */
+import * as React from "react";
 
-import * as React from 'react'
+const withTryCatch = (WrappedComponent: any) => {
+  return class extends React.Component {
+    result = null;
+    error = null;
 
-import styles from './styles.css'
+    constructor(props: any) {
+      super(props);
+    }
 
-export type Props = { text: string }
+    trycatch = (statement:Function,errorHandler?:Function) => {
+      try {
+        this.result = statement()
+      } catch (error) {
+        if(errorHandler) errorHandler(error)
+        this.error = error
+      } finally{
+        return {result: this.result,error:this.error}
+      }
+    }
 
-export default class ExampleComponent extends React.Component<Props> {
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
+    render() {
+      return <WrappedComponent trycatch={this.trycatch} />;
+    }
   }
+};
+
+const useTryCatch = (statement:Function,errorHandler?:Function) => {
+  let _result:any = null
+  let _error:any = null
+
+  const trycatch = () => {
+    try {
+      _result = statement()
+    } catch (error) {
+      if(errorHandler) errorHandler(error)
+      _error = error
+    } finally{
+      return {result: _result,error: _error}
+    }
+  }
+  return trycatch()
 }
+
+
+export {withTryCatch,useTryCatch}

@@ -7,7 +7,11 @@
 ## Install
 
 ```bash
-npm install --save trycatch
+npm install --save @vyppn/trycatch
+```
+OR
+```bash
+yarn add @vyppn/trycatch
 ```
 
 ## Usage
