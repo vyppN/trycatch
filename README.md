@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/trycatch.svg)](https://www.npmjs.com/package/trycatch) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+
+Try-Catch is dirty. It makes your code hardly to read. Imagin you have tons of try-catch blocks in your code. It always worked as it was... but it looks ugly bros!
+Let's hide them and take a look at your clean code.
+
 ## Install
 
 ```bash

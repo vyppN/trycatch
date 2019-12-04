@@ -1,10 +1,14 @@
 {
   "name": "@vyppn/trycatch",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Hide try/catch in hook and HOC",
   "author": "vyppN",
   "license": "MIT",
   "repository": "vyppN/trycatch",
+  "keywords": [
+    "trycatch",
+    "try-catch"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
