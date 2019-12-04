@@ -14,9 +14,9 @@ OR
 yarn add @vyppn/trycatch
 ```
 
-## Usage
+# Usage
 
-HOC style
+## HOC style
 ```tsx
 import * as React from 'react'
 
@@ -54,7 +54,7 @@ class App extends React.Component {
 export default withTryCatch(App)
 ```
 
-Hook style
+## Hook style
 
 ```tsx
 import {useTryCatch} from '@vyppn/trycatch'
