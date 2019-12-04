@@ -3,21 +3,23 @@
  */
 import * as React from "react";
 
+export type Result<T> = {result:T,error:Error}
+
 const withTryCatch = (WrappedComponent: any) => {
   return class extends React.Component {
-    result = null;
-    error = null;
+    result:any = null;
+    error:any = null;
 
     constructor(props: any) {
       super(props);
     }
 
-    trycatch = (statement:Function,errorHandler?:Function) => {
+    trycatch<T>(fn:()=>T,errorHandler:(error:Error)=>void = error => null):Result<T>{
       try {
-        this.result = statement()
+        this.result = fn()
       } catch (error) {
-        if(errorHandler) errorHandler(error)
         this.error = error
+        if(errorHandler) errorHandler(error)
       } finally{
         return {result: this.result,error:this.error}
       }

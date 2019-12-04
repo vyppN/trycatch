@@ -32,5 +32,5 @@ import {withTryCatch, useTryCatch} from 'trycatch'
 export default () => {
   const {result,error} = useTryCatch(test)
   console.log('RES',result,'ERR',error)
-  return <div>TEST HOOK: {result}, {error.message}</div>
+  return <div>TEST HOOK: {result}, {error && error.message}</div>
 }
