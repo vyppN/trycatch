@@ -3,41 +3,55 @@
  */
 import * as React from "react";
 
-export type Result<T> = {result:T,error:Error}
+export type Result={
+  result:any,
+  error:any
+}
 
 const withTryCatch = (WrappedComponent: any) => {
   return class extends React.Component {
-    result:any = null;
-    error:any = null;
+    result = null;
+    error = null;
 
     constructor(props: any) {
       super(props);
     }
 
-    trycatch<T>(fn:()=>T,errorHandler?:(error:Error)=>void):Result<T>{
+    trycatch = (statement:Function,errorHandler?:Function):Result => {
       try {
-        this.result = fn()
+        this.result = statement()
       } catch (error) {
-        this.error = error
         if(errorHandler) errorHandler(error)
+        this.error = error
+      } finally{
+        return {result: this.result,error:this.error}
+      }
+    }
+
+    trycatchAsync = async (statement:Function,errorHandler?:Function):Promise<Result> => {
+      try {
+        this.result = await statement()
+      } catch (error) {
+        if(errorHandler) errorHandler(error)
+        this.error = error
       } finally{
         return {result: this.result,error:this.error}
       }
     }
 
     render() {
-      return <WrappedComponent trycatch={this.trycatch} />;
+      return <WrappedComponent trycatch={this.trycatch} trycatchAsync={this.trycatchAsync} />;
     }
   }
-}
+};
 
-function useTryCatch<T>(fn:()=>T,errorHandler?:(error:Error)=>void):Result<T>{
+const useTryCatch = (statement:Function,errorHandler?:Function) => {
   let _result:any = null
   let _error:any = null
 
-  const trycatch = ():Result<T> => {
+  const trycatch = () => {
     try {
-      _result = fn()
+      _result = statement()
     } catch (error) {
       if(errorHandler) errorHandler(error)
       _error = error
@@ -48,5 +62,22 @@ function useTryCatch<T>(fn:()=>T,errorHandler?:(error:Error)=>void):Result<T>{
   return trycatch()
 }
 
+const useTryCatchAsync = async (fn:Function,errorHandler?:Function):Promise<Result> => {
+  let _result:any = null
+  let _error:any = null
 
-export {withTryCatch,useTryCatch}
+  const trycatch = async() => {
+    try {
+      _result = await fn()
+    } catch (error) {
+      if(errorHandler) errorHandler(error)
+      _error = error
+    } finally{
+      return {result: _result,error: _error}
+    }
+  }
+  return await trycatch()
+}
+
+
+export {withTryCatch,useTryCatch,useTryCatchAsync}

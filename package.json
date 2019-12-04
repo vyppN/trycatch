@@ -1,6 +1,6 @@
 {
   "name": "@vyppn/trycatch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Hide try/catch in hook and HOC",
   "author": "vyppN",
   "license": "MIT",

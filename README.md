@@ -38,15 +38,15 @@ class App extends React.Component {
   //
   // Can rewrite like this
   
-  const {result,error} = this.props.try(someThrowable,someErrorHadler)
+  const {result,error} = this.props.trycatch(someThrowable,someErrorHadler)
 
   // Or without error handler
   
-  const {result,error} = this.props.try(someThrowable)
+  const {result,error} = this.props.trycatch(someThrowable)
   
   // Or with void method and no error handling
   
-  const {error} = this.porps.try(someThrowable)
+  const {error} = this.porps.trycatch(someThrowable)
 
   render () {
     return (
@@ -72,6 +72,17 @@ export default () => {
 
   return <div>Hellow</div>
 }
+```
+
+## Asynchronouse Call
+```tsx
+
+// HOC
+const {result,error} = await this.props.trycatchAsync(someAsyncThrowable,someErrorHandler)
+
+// Hook
+const {result,error} = await useTryCatchAsync(someAsyncThrowable,someErrorHandler)
+
 ```
 
 ## License

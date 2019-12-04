@@ -1,36 +1,32 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 
-import {withTryCatch, useTryCatch} from 'trycatch'
+import {withTryCatch, useTryCatch,useTryCatchAsync} from 'trycatch'
 
 
   const test = () => {
-    eval("alert('Hello)")
-    // return 'TESTNA'
+    // eval("alert('Hello)")
+    return 'TEST'
   }
 
   const errorHandler = error => {
     console.error(error)
   }
 
-// class App extends Component {
+class App extends Component {
 
+  testMe = async () => {
+    const {result,error} = await this.props.trycatchAsync(test)
+    console.log('RES',result,'ERR',error)
+  }
 
-//   render () {
-//     let {result,error} = this.props.trycatch(test)
-//     console.log('RES',result,'ERR',error)
-//     return (
-//       <div>
-//         TEST
-//       </div>
-//     )
-//   }
-// }
-
-// export default withTryCatch(App)
-
-
-export default () => {
-  const {result,error} = useTryCatch(test)
-  console.log('RES',result,'ERR',error)
-  return <div>TEST HOOK: {result}, {error && error.message}</div>
+  render () {
+    this.testMe()
+    return (
+      <div>
+        TEST
+      </div>
+    )
+  }
 }
+
+export default withTryCatch(App)
