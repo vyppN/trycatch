@@ -10,8 +10,8 @@ export type Result={
 
 const withTryCatch = (WrappedComponent: any) => {
   return class extends React.Component {
-    result = null;
-    error = null;
+    result:any = null;
+    error:any = null;
 
     constructor(props: any) {
       super(props);
@@ -28,7 +28,7 @@ const withTryCatch = (WrappedComponent: any) => {
       }
     }
 
-    trycatchAsync = async (statement:Function,errorHandler?:Function):Promise<Result> => {
+    trycatchAsync = async (statement:()=>Promise<Function>,errorHandler?:Function):Promise<Result> => {
       try {
         this.result = await statement()
       } catch (error) {
@@ -62,7 +62,7 @@ const useTryCatch = (statement:Function,errorHandler?:Function) => {
   return trycatch()
 }
 
-const useTryCatchAsync = async (fn:Function,errorHandler?:Function):Promise<Result> => {
+const useTryCatchAsync = async (fn:()=>Promise<Function>,errorHandler?:Function):Promise<Result> => {
   let _result:any = null
   let _error:any = null
 
