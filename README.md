@@ -16,18 +16,42 @@ yarn add @vyppn/trycatch
 
 ## Usage
 
+HOC style
 ```tsx
 import * as React from 'react'
 
-import MyComponent from 'trycatch'
+import {withTryCatch} from 'trycatch'
 
-class Example extends React.Component {
+class App extends React.Component {
+
+  // for try-catch statement:
+  // try{
+  //  let result someThrowable()
+  // }catch(error){
+      let theError = error
+  //  someErrorHandler(error)
+  // }
+  //
+  // Can rewrite like this
+  
+  const {result,error} = this.props.try(someThrowable,someErrorHadler)
+
+  // Or without error handler
+  
+  const {result,error} = this.props.try(someThrowable)
+  
+  // Or with void method and no error handling
+  
+  const {error} = this.porps.try(someThrowable)
+
   render () {
     return (
-      <MyComponent />
+      <App />
     )
   }
 }
+
+export default withTryCatch(App)
 ```
 
 ## License
